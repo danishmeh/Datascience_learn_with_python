@@ -64,7 +64,7 @@ with model_training:
     
     #  # X and y define
     X = df[[input_features]]
-    y = df[['fare']]
+    y = df[['pclass']]
     model.fit(X, y)
     pred = model.predict(y)
     
