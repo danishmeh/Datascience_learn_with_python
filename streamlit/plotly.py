@@ -15,7 +15,7 @@ st.write(df.describe())
 
 year_option = df['year'].unique().tolist()
 year  = st.selectbox("which year should we plot",year_option,0)
-df = df[df['year']==year]
+# # df = df[df['year']==year]
 
 
 
@@ -26,6 +26,9 @@ df = df[df['continent']==cont]
 st.header("Countinent Graph with Respect to Years")
 
 fig = px.scatter(df,x ='gdpPercap',y ='lifeExp',size ='pop',hover_name='country',color ='country',
-                    log_x = True, size_max =55,range_x=[1000,100000],range_y=[20,90])
-fig.update_layout(width=1000, height=500)
+                    animation_frame='year',animation_group = 'country',
+                    log_x = True, size_max =55,range_x=[100,100000],range_y=[20,90])
+fig.update_layout(width=800, height=500)
+# HOW TO ANIMATE THE WEBAPP
+
 st.write(fig)
