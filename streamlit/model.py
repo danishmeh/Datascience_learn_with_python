@@ -17,6 +17,7 @@ st.write('''
 dataset_name = st.sidebar.selectbox(
                     'dataset',
                       ('iris','breast Cancer','wine'))
+
 classifier_name = st.sidebar.selectbox('Model',
                       ('Select Classifer',
                        'KNN','SVM','Random_Forest')                
@@ -37,7 +38,7 @@ def get_dataset(dataset_name):
 X,y = get_dataset(dataset_name)
 st.write("Shape of Dataset",X.shape)
 st.write("Unique Values",len(np.unique(y)))
-
+st.write("Dataset         ",dataset_name)
 # ab hum log model k parameter add karye gye
 def add_parameter_ui(classifier_name):
     param = dict()
@@ -82,3 +83,20 @@ y_pred = clf.predict(X_test)
 acc = accuracy_score(y_test,y_pred) 
 st.write(f'Classifier,{classifier_name}')
 st.write(f'Accuracy,{acc}')
+
+# plot data
+
+pca = PCA(2)
+X_projected = pca.fit_transform(X)
+
+# now data split into 0 and 1 slice
+x1 = X_projected[:,0]
+x2 = X_projected[:,1]
+fig = plt.figure()
+plt.scatter(x1, x2,
+            c=y, alpha=0.8,cmap='viridis')
+# plt.xlabel('pca Component 1')
+# plt.ylabel('pca Component 2')
+
+# plt.show()
+st.pyplot(fig)
